@@ -11,9 +11,14 @@ var config = env.getOrElseAll({
     $type: env.types.String
   },
   host: {
-    $default: 'http://localhost:9200/',
+    $default: 'localhost:9200',
     $aliases: ['ES_CLI_HOST'],
     $type: env.types.String
+  },
+  https: {
+    $default: false,
+    $aliases: ['ES_CLI_SSL'],
+    $type: env.types.Boolean
   }
 });
 
