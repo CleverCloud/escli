@@ -1,18 +1,39 @@
 {
   "name": "escli",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1",
+  "description": "Set of admin CLI tools for elastic search management",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "bin": {
+    "clever": "./index.js",
+    "install-escli-completion": "./scripts/install-autocomplete.sh",
+    "uninstall-escli-completion": "./scripts/uninstall-autocomplete.sh"
+  },
+  "keywords": [
+    "cli",
+    "elasticsearch",
+    "admin"
+  ],
+  "scripts": {
+    "postinstall": "./scripts/postinstall.sh"
+  },
+  "author": "Quentin ADAM <quentin.adam@clever-cloud.com>",
+  "license": "MIT",
   "dependencies": {
     "cliparse": "^0.2.5",
     "common-env": "^5.2.0",
     "lodash": "^3.10.1",
     "request": "^2.67.0",
     "request-promise": "^1.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CleverCloud/escli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CleverCloud/escli/issues"
+  },
+  "homepage": "https://github.com/CleverCloud/escli"
 }
