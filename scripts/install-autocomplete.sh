@@ -9,7 +9,7 @@ install_bash_root() {
 
   echo "Installing bash completion script"
   mkdir -p "${compdir}"
-  clever --bash-autocomplete-script "${us}" | "${wrapper}" tee "${compdir}"/escli >/dev/null
+  escli --bash-autocomplete-script "${us}" | "${wrapper}" tee "${compdir}"/escli >/dev/null
 }
 
 install_zsh_root() {
@@ -19,7 +19,7 @@ install_zsh_root() {
 
   echo "Installing zsh completion script"
   mkdir -p "${compdir}"
-  clever --zsh-autocomplete-script "${us}" | "${wrapper}" tee "${compdir}"/_escli >/dev/null
+  escli --zsh-autocomplete-script "${us}" | "${wrapper}" tee "${compdir}"/_escli >/dev/null
 }
 
 install() {
