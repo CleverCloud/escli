@@ -1,4 +1,4 @@
-! escli
+# escli
 escli si a CLI tool to manage elastic search cluster, rely on the awesome cliparse toolkit by @clementd
 
 It's an open WIP with current features as :
