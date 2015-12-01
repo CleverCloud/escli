@@ -15,17 +15,7 @@ install with
 `npm install escli --global
 `
 
-
-Usage: escli
 Simple elastic search management command line. Configure with Env variable, using ES_CLI_HOST and optionaly ES_CLI_USER and ES_CLI_PASSWORD
 
-Options:
-[--help, -?]          Display help about this program
-[--version, -V]       Display the version of this program
-
-Available Commands:
-help                  display help about this program
-shard_allocation      shards allocation management
-list                  view list of various ES management data
-nodes                 nodes operations
-index                 act on indexes of the cluster
+try
+`escli --help`
