@@ -1,13 +1,13 @@
 {
   "name": "escli",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Set of admin CLI tools for elastic search management",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "clever": "./index.js",
+    "escli": "./index.js",
     "install-escli-completion": "./scripts/install-autocomplete.sh",
     "uninstall-escli-completion": "./scripts/uninstall-autocomplete.sh"
   },
