@@ -1,4 +1,4 @@
-#!/bin/env node
+#! /usr/bin/env node
 
 var cliparse = require("cliparse");
 var config = require("./src/config.js");
