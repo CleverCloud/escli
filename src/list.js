@@ -4,13 +4,19 @@ module.exports = function(config, es_request) {
 
   var shard_list = function() {
     return es_request.r({
-      dpath:'_cat/shards?v'
+      dpath: '_cat/shards?v'
     }).then(console.log);
   };
 
   var index_list = function() {
     return es_request.r({
-      dpath:'_cat/indices?v'
+      dpath: '_cat/indices?v'
+    }).then(console.log);
+  };
+
+  var nodes_list = function() {
+    return es_request.r({
+      dpath: '_cat/nodes?v'
     }).then(console.log);
   };
 
@@ -27,7 +33,11 @@ module.exports = function(config, es_request) {
         cliparse.command(
           "indexes", {
             description: "view list of indexes"
-          }, index_list)
+          }, index_list),
+        cliparse.command(
+          "nodes", {
+            description: "view list of nodes"
+          }, nodes_list)
       ]
     });
 };

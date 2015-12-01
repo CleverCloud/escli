@@ -31,6 +31,13 @@ module.exports = function(config) {
     return rp(o)
   };
 
+  es_request.nodes = function(activated) {
+    var o = es_request.direct_request({
+      dpath: '_nodes'
+    })
+    return rp(o)
+  };
+
   return es_request;
 
 };
