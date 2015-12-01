@@ -7,7 +7,7 @@ It's an open WIP with current features as :
 * reallocate all shard from one node in the objective of kill it gracefully
 * open/close indexes
 
-Configuration is made using common-env by @FGRibreau
+Configuration is made using common-env by @FGRibreau My use case : autoenv + autojump
 
 Internal is made with promise
 
