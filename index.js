@@ -5,6 +5,7 @@ var config = require("./src/config.js");
 var es_request = require("./src/es_request.js")(config);
 
 var shard_allocation = require('./src/shard_allocation.js')(config, es_request);
+var list = require('./src/list.js')(config, es_request);
 
 
 
@@ -15,18 +16,7 @@ var escli = cliparse.cli({
 
     shard_allocation,
 
-    cliparse.command(
-      "add2", {
-        description: "add 2 to the given integer and display the result",
-        args: [
-          cliparse.argument("int", {
-            default: 0,
-            parser: cliparse.parsers.intParser,
-            description: "int to add 2 to"
-          })
-        ]
-      },
-      null)
+    list
   ]
 });
 

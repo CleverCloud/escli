@@ -16,6 +16,10 @@ module.exports = function(config) {
     return o;
   };
 
+  es_request.r = function(options){
+    return rp(es_request.direct_request(options));
+  };
+
   es_request.shard_allocation = function(activated) {
     var o = es_request.direct_request({
       dpath: '_settings',
