@@ -46,7 +46,7 @@ module.exports = function(config, es_request) {
       console.log('launch relocation command')
 
       var ff = es_request.r({
-        dpath: '_cluster/reroute',
+        dpath: '_cluster/reroute?explain',
         method: 'POST',
         json: {
           commands: move_orders

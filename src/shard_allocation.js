@@ -3,15 +3,25 @@ var cliparse = require("cliparse");
 module.exports = function(config, es_request) {
 
   var shard_allocation_enable = function() {
-    es_request.shard_allocation(false).then(function(r) {
-      console.log(r);
-    });
+    return es_request.r({
+      dpath: '_settings',
+      method: 'PUT',
+      json: {
+        "index.routing.allocation.disable_allocation": false//,
+//        'cluster.routing.rebalance.enable': 'all'
+      }
+    }).then(console.log);
   };
 
   var shard_allocation_disable = function() {
-    es_request.shard_allocation(false).then(function(r) {
-      console.log(r);
-    });
+    return es_request.r({
+      dpath: '_settings',
+      method: 'PUT',
+      json: {
+        "index.routing.allocation.disable_allocation": true //,
+  //      'cluster.routing.rebalance.enable': 'none'
+      }
+    }).then(console.log);
   };
 
 
