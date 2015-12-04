@@ -53,8 +53,11 @@ module.exports = function(config, es_request) {
       var data = JSON.parse(iiii);
 
       var indices = _.keys(data.routing_table.indices)
-      
-      console.log('shards to move')
+
+      var i = 0;
+
+
+
       var move_orders = _.map(data.routing_nodes.nodes[node_key], function(i) {
         return {
           'move': {
