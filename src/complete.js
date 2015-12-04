@@ -17,7 +17,7 @@ module.exports = function(config, es_request) {
       return es_request.r({
         dpath: '_cat/indices?h=i'
       }).then(function(_res) {
-        return _res.split('\n');
+        return cliparse.autocomplete.words(_res.split('\n'));
       });
     }
 
