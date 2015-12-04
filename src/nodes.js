@@ -179,7 +179,7 @@ module.exports = function(config, es_request, complete) {
   };
 
 
-  var stringArgument = cliparse.argument(
+  var node_Argument = cliparse.argument(
     "node-name", {
       defaultValue: '',
       description: "node name you want to decommision",
@@ -203,17 +203,17 @@ module.exports = function(config, es_request, complete) {
       commands: [
         cliparse.command(
           "empty_node", {
-            args: [stringArgument],
+            args: [node_Argument],
             description: "reasign shards out of this node"
           }, nodes_remove_allocation),
         cliparse.command(
           "get_unasigned", {
-            args: [stringArgument],
+            args: [node_Argument],
             description: "get 20 unasigned shards on this node"
           }, nodes_unasigned_allocation),
         cliparse.command(
           "reassigne_from_node_to_node", {
-            args: [stringArgument, to_Argument, stringArgument],
+            args: [node_Argument, to_Argument, node_Argument],
             description: "get 10 shards from node1 to node2"
           }, from_node_to_node)
       ]

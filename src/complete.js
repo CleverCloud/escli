@@ -12,6 +12,13 @@ module.exports = function(config, es_request) {
         var data = JSON.parse(nodes_res);
         return cliparse.autocomplete.words(_.pluck(data.nodes, 'name'));
       });
+    },
+    indices_complete: function() {
+      return es_request.r({
+        dpath: '_cat/indices?h=i'
+      }).then(function(_res) {
+        return _res.split('\n');
+      });
     }
 
 
