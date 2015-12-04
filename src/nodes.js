@@ -59,6 +59,59 @@ module.exports = function(config, es_request) {
   };
 
 
+  var nodes_unasigned_allocation = function(call_data) {
+    if (call_data.args.length < 1) {
+      return "You must define a node name";
+    }
+    var node_name = call_data.args[0];
+
+    return es_request.r({
+      dpath: '_cluster/state'
+    }).then(function(iiii) {
+      var data = JSON.parse(iiii);
+
+      var node_key = _.result(_.find(_.map(data.nodes, function(v, k) {
+        v.id = k;
+        return v;
+      }), function(v, k) {
+        return v.name == node_name;
+      }), 'id');
+      if (node_key == undefined) {
+        console.log("unvalid node name")
+        return "node name is not valid"
+      } else {
+        console.log("the node id for " + node_name + " is " + node_key);
+      }
+
+      console.log('shards to allocate')
+      var move_orders = _.map(_.sample(data.routing_nodes.unassigned, 20), function(i) {
+        return {
+          'allocate': {
+            'index': i['index'],
+            'shard': i.shard,
+            'node': node_key
+          }
+        }
+      })
+
+      console.log(move_orders)
+
+      console.log('launch allocation command')
+
+      var ff = es_request.r({
+        dpath: '_cluster/reroute?explain',
+        method: 'POST',
+        json: {
+          commands: move_orders
+
+        }
+      });
+
+      return ff;
+    }).then(console.log);
+  };
+
+
   var stringArgument = cliparse.argument(
     "node-name", {
       defaultValue: '',
@@ -76,8 +129,13 @@ module.exports = function(config, es_request) {
         cliparse.command(
           "empty_node", {
             args: [stringArgument],
-            description: "view list of shards"
-          }, nodes_remove_allocation)
+            description: "reasign shards out of this node"
+          }, nodes_remove_allocation),
+        cliparse.command(
+          "get_unasigned", {
+            args: [stringArgument],
+            description: "get 20 unasigned shards on this node"
+          }, nodes_unasigned_allocation)
       ]
     });
 };
