@@ -3,10 +3,11 @@
 var cliparse = require("cliparse");
 var config = require("./src/config.js");
 var es_request = require("./src/es_request.js")(config);
+var complete = require("./src/complete.js")(config, es_request);
 
 var shard_allocation = require('./src/shard_allocation.js')(config, es_request);
 var list = require('./src/list.js')(config, es_request);
-var nodes = require('./src/nodes.js')(config, es_request);
+var nodes = require('./src/nodes.js')(config, es_request, complete);
 var indexes = require('./src/indexes.js')(config, es_request);
 
 

@@ -1,7 +1,7 @@
 var cliparse = require("cliparse");
 var _ = require("lodash");
 
-module.exports = function(config, es_request) {
+module.exports = function(config, es_request, complete) {
 
   var nodes_remove_allocation = function(call_data) {
     if (call_data.args.length < 1) {
@@ -182,7 +182,8 @@ module.exports = function(config, es_request) {
   var stringArgument = cliparse.argument(
     "node-name", {
       defaultValue: '',
-      description: "node name you want to decommision"
+      description: "node name you want to decommision",
+      complete: complete.nodes_complete
     }
   );
 
