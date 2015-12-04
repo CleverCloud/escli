@@ -151,7 +151,9 @@ module.exports = function(config, es_request, complete) {
       }
 
       console.log('shards to move')
-      var move_orders = _.map(_.sample(data.routing_nodes.nodes[node_key_from], number_of_shards), function(i) {
+      var move_orders = _.map(_.sample(_.filter(data.routing_nodes.nodes[node_key_from], function(i) {
+        return i.state != 'RELOCATING';
+      }), number_of_shards), function(i) {
         return {
           'move': {
             'index': i.index,
