@@ -119,6 +119,7 @@ module.exports = function(config, es_request, complete) {
 
     var node_from = call_data.args[0];
     var node_to = call_data.args[2];
+    var number_of_shards = call_data.args[3];
 
     return es_request.r({
       dpath: '_cluster/state'
@@ -150,7 +151,7 @@ module.exports = function(config, es_request, complete) {
       }
 
       console.log('shards to move')
-      var move_orders = _.map(_.sample(data.routing_nodes.nodes[node_key_from], 10), function(i) {
+      var move_orders = _.map(_.sample(data.routing_nodes.nodes[node_key_from], number_of_shards), function(i) {
         return {
           'move': {
             'index': i.index,
