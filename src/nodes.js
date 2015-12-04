@@ -207,7 +207,7 @@ module.exports = function(config, es_request) {
           "get_unasigned", {
             args: [stringArgument],
             description: "get 20 unasigned shards on this node"
-          }, nodes_unasigned_allocation)
+          }, nodes_unasigned_allocation),
         cliparse.command(
           "reassigne_from_node_to_node", {
             args: [stringArgument],
