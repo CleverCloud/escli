@@ -113,17 +113,12 @@ module.exports = function(config, es_request) {
 
 
   var from_node_to_node = function(call_data) {
-    if (call_data.args.length < 1) {
-      return "You must define a node1->node2 arguments";
-    }
-    var node_group = call_data.args[0].split('->');
-
-    if (node_group.length != 2) {
-      return "You must define a node1->node2 arguments";
+    if (call_data.args.length < 3) {
+      return "You must define a node1 to node2 arguments";
     }
 
-    var node_from = node_group[0];
-    var node_to = node_group[1];
+    var node_from = call_data.args[0];
+    var node_to = call_data.args[2];
 
     return es_request.r({
       dpath: '_cluster/state'
@@ -191,6 +186,13 @@ module.exports = function(config, es_request) {
     }
   );
 
+  var to_Argument = cliparse.argument(
+    "to", {
+      defaultValue: 'to',
+      description: "just write \"to\""
+    }
+  );
+
 
 
 
@@ -210,8 +212,8 @@ module.exports = function(config, es_request) {
           }, nodes_unasigned_allocation),
         cliparse.command(
           "reassigne_from_node_to_node", {
-            args: [stringArgument],
-            description: "get 10 shards from node1->node2"
+            args: [stringArgument, to_Argument, stringArgument],
+            description: "get 10 shards from node1 to node2"
           }, from_node_to_node)
       ]
     });
