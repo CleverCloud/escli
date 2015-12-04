@@ -194,6 +194,12 @@ module.exports = function(config, es_request, complete) {
     }
   );
 
+  var number_Argument = cliparse.argument("int", {
+    default: 10,
+    parser: cliparse.parsers.intParser,
+    description: "number of shards to move"
+  });
+
 
 
 
@@ -212,9 +218,9 @@ module.exports = function(config, es_request, complete) {
             description: "get 20 unasigned shards on this node"
           }, nodes_unasigned_allocation),
         cliparse.command(
-          "reassigne_from_node_to_node", {
-            args: [node_Argument, to_Argument, node_Argument],
-            description: "get 10 shards from node1 to node2"
+          "move_shards", {
+            args: [node_Argument, to_Argument, node_Argument, number_Argument],
+            description: "move [x] shards from node1 to node2"
           }, from_node_to_node)
       ]
     });
