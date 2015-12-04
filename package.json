@@ -1,6 +1,6 @@
 {
   "name": "escli",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Set of admin CLI tools for elastic search management",
   "main": "index.js",
   "scripts": {
