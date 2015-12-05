@@ -9,6 +9,7 @@ var shard_allocation = require('./src/shard_allocation.js')(config, es_request, 
 var list = require('./src/list.js')(config, es_request, complete);
 var nodes = require('./src/nodes.js')(config, es_request, complete);
 var indexes = require('./src/indexes.js')(config, es_request, complete);
+var health = require('./src/health.js')(config, es_request, complete);
 
 
 
@@ -19,7 +20,8 @@ var escli = cliparse.cli({
     shard_allocation,
     list,
     nodes,
-    indexes
+    indexes,
+    health
   ]
 });
 
