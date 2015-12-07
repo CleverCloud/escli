@@ -55,7 +55,7 @@ module.exports = function(config, es_request, complete) {
       });
 
       return ff;
-    }).then(console.log);
+    }).then(JSON.stringify).then(console.log);
   };
 
 
@@ -108,7 +108,7 @@ module.exports = function(config, es_request, complete) {
       });
 
       return ff;
-    }).then(console.log);
+    }).then(JSON.stringify).then(console.log);
   };
 
 
@@ -178,7 +178,7 @@ module.exports = function(config, es_request, complete) {
       });
 
       return ff;
-    }).then(console.log);
+    }).then(JSON.stringify).then(console.log);
   };
 
 
