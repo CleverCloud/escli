@@ -9,6 +9,8 @@ module.exports = function(config, es_request, complete) {
     }
     var node_name = call_data.args[0];
 
+    var number_of_shards = call_data.args[1];
+
     return es_request.r({
       dpath: '_cluster/state'
     }).then(function(iiii) {
@@ -30,7 +32,13 @@ module.exports = function(config, es_request, complete) {
       var onodes = _.without(_.keys(data.nodes), node_key);
 
       console.log('shards to move')
-      var move_orders = _.map(data.routing_nodes.nodes[node_key], function(i) {
+      var t = _.filter(data.routing_nodes.nodes[node_key], function(i) {
+        return i.state != 'RELOCATING';
+      });
+      if (number_of_shards > t.length) {
+        number_of_shards = t.length;
+      }
+      var move_orders = _.map(t.slice(0, number_of_shards), function(i) {
         return {
           'move': {
             'index': i.index,
@@ -66,6 +74,7 @@ module.exports = function(config, es_request, complete) {
       return "You must define a node name";
     }
     var node_name = call_data.args[0];
+    var number_of_shards = call_data.args[1];
 
     return es_request.r({
       dpath: '_cluster/state'
@@ -86,7 +95,7 @@ module.exports = function(config, es_request, complete) {
       }
 
       console.log('shards to allocate')
-      var move_orders = _.map(_.sample(data.routing_nodes.unassigned, 20), function(i) {
+      var move_orders = _.map(_.sample(data.routing_nodes.unassigned, number_of_shards), function(i) {
         return {
           'allocate': {
             'index': i['index'],
@@ -218,13 +227,13 @@ module.exports = function(config, es_request, complete) {
       commands: [
         cliparse.command(
           "empty_node", {
-            args: [node_Argument],
+            args: [node_Argument, number_Argument],
             description: "reasign shards out of this node"
           }, nodes_remove_allocation),
         cliparse.command(
           "get_unasigned", {
-            args: [node_Argument],
-            description: "get 20 unasigned shards on this node"
+            args: [node_Argument, number_Argument],
+            description: "get N unasigned shards on this node"
           }, nodes_unasigned_allocation),
         cliparse.command(
           "move_shards", {
