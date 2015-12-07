@@ -55,7 +55,9 @@ module.exports = function(config, es_request, complete) {
       });
 
       return ff;
-    }).then(JSON.stringify).then(console.log);
+    }).then(function(d) {
+      return JSON.stringify(d, null, 2);
+    }).then(console.log);
   };
 
 
@@ -108,7 +110,9 @@ module.exports = function(config, es_request, complete) {
       });
 
       return ff;
-    }).then(JSON.stringify).then(console.log);
+    }).then(function(d) {
+      return JSON.stringify(d, null, 2);
+    }).then(console.log);
   };
 
 
@@ -178,7 +182,9 @@ module.exports = function(config, es_request, complete) {
       });
 
       return ff;
-    }).then(JSON.stringify).then(console.log);
+    }).then(function(d) {
+      return JSON.stringify(d, null, 2);
+    }).then(console.log);
   };
 
 
